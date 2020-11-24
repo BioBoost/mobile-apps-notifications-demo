@@ -26,6 +26,14 @@
       </v-col>
 
       <v-col
+        cols="12"
+      >
+
+        <v-btn color="secondary" @click="notifyMe">Click to show Notification</v-btn>
+
+      </v-col>
+
+      <v-col
         class="mb-5"
         cols="12"
       >
@@ -94,6 +102,12 @@
 <script>
   export default {
     name: 'HelloWorld',
+
+    methods: {
+      notifyMe() {
+          this.notification('Stop clicking the notification button damnit', 'error');
+      }
+    },
 
     data: () => ({
       ecosystem: [

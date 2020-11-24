@@ -37,6 +37,8 @@
       </v-btn>
     </v-app-bar>
 
+    <Notification />
+
     <v-main>
       <HelloWorld/>
     </v-main>
@@ -45,12 +47,14 @@
 
 <script>
 import HelloWorld from './components/HelloWorld';
+import Notification from './components/Notification';
 
 export default {
   name: 'App',
 
   components: {
     HelloWorld,
+    Notification
   },
 
   data: () => ({
