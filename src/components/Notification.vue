@@ -1,14 +1,14 @@
 <template>
   <div class="text-center">
-    <v-snackbar v-model="show" top app content-class="white--text" :color="color" timeout="5000">
-      {{ message }}
+    <v-snackbar :value="notification.show" top app content-class="white--text" :color="color">
+      {{ notification.message }}
       <template v-slot:action="{ attrs }">
         <v-btn
           fab
           small
           light
           v-bind="attrs"
-          @click="show = false"
+          @click="hide"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -20,32 +20,24 @@
 <script>
 export default {
   name: 'Notification',
-  data() {
-    return {
-      show: false,
-      message: '',
-      type: 'info'
+  methods: {
+    hide() {
+      this.$store.dispatch('hideNotification');
     }
-  },
-  created () {
-    // Substribe to state mutations
-    this.$store.subscribe((mutation, state) => {
-      if (mutation.type === 'showNotification') {
-        this.message = state.notification.message;
-        this.type = state.notification.type;
-        this.show = true;
-      }
-    })
   },
   computed:{
     isMobile() {
       return this.$vuetify.breakpoint.mobile;
     },
     color() {
-      if (this.type === 'success') return 'primary';
-      else if (this.type === 'error') return 'ternary';
-      else if (this.type === 'warning') return 'orange darken-2';
+      let type = this.notification.type;
+      if (type === 'success') return 'primary';
+      else if (type === 'error') return 'ternary';
+      else if (type === 'warning') return 'orange darken-2';
       else return 'secondary'
+    },
+    notification() {
+      return this.$store.getters.notification;
     }
   },
 }

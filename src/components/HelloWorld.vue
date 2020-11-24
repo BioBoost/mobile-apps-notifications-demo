@@ -105,7 +105,7 @@
 
     methods: {
       notifyMe() {
-          this.notification('Stop clicking the notification button damnit', 'error');
+          this.$notification('Stop clicking the notification button damnit', 'error');
       }
     },
 
